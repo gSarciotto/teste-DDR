@@ -1,7 +1,7 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router, Request, Response } from "express";
 import Tabulacao from "./Tabulacao";
 import { convertToTabulacaoAndValidate } from "./utils/validators";
-import Pg from "../utils/wrappers/Pg";
+import { Pg } from "../utils/";
 import TabulacaoDatabase from "./TabulacaoDatabase";
 import { QueryConfig } from "pg";
 

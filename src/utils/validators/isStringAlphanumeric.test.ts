@@ -1,4 +1,4 @@
-import { isStringAlphanumeric } from ".";
+import isStringAlphanumeric from "./isStringAlphanumeric";
 
 describe("isStringAlphanumeric should be false because", () => {
     test("string contains -", () => {

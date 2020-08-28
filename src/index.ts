@@ -1,7 +1,7 @@
 import * as express from "express";
 import { generateTabulacoesRouter } from "./TabulacaoGerenciamento";
 import { config } from "dotenv";
-import Pg from "./utils/wrappers/Pg";
+import { Pg } from "./utils";
 
 config();
 

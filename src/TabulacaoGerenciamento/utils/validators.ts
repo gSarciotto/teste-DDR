@@ -1,9 +1,5 @@
 import Tabulacao from "../Tabulacao";
-import {
-    isStringAlphanumeric,
-    validateTimestamp
-} from "../../utils/validators";
-import { UuidV4 } from "../../utils/wrappers/Uuid";
+import { UuidV4, isStringAlphanumeric, validateTimestamp } from "../../utils";
 
 export function isTabulacao(input: unknown): input is Tabulacao {
     const inputAsTabulacao = input as Tabulacao;

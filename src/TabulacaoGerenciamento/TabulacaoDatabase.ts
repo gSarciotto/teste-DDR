@@ -1,4 +1,4 @@
-import Pg from "../utils/wrappers/Pg";
+import { Pg } from "../utils";
 import { QueryConfig, QueryResult } from "pg";
 
 export interface ITabulacaoDatabase {

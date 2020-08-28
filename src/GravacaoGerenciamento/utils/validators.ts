@@ -1,9 +1,10 @@
 import Gravacao from "../Gravacao";
-import UuidV4 from "../../utils/wrappers/Uuid";
+import { UuidV4, validateTimestamp, isStringAlphanumeric } from "../../utils";
+/*import UuidV4 from "../../utils/wrappers/Uuid";
 import {
     validateTimestamp,
     isStringAlphanumeric
-} from "../../utils/validators";
+} from "../../utils/validators";*/
 
 export function isGravacao(input: unknown): input is Gravacao {
     const inputAsGravacao = input as Gravacao;
