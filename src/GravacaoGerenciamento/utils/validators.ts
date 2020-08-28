@@ -24,3 +24,13 @@ export function validateGravacao(input: Gravacao): boolean {
     if (!validateTimestamp(input.dataGravacao)) return false;
     return true;
 }
+
+export function convertToGravacaoAndValidate(input: unknown): Gravacao {
+    if (isGravacao(input)) {
+        if (validateGravacao(input)) {
+            return input;
+        }
+        throw new Error("input is not a valid Gravacao");
+    }
+    throw new Error("Unable to convert to Gravacao");
+}
