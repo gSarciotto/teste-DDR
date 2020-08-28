@@ -6,3 +6,10 @@ CREATE TABLE tabulacoes (
     numeroBinado TEXT,
     numeroAcesso TEXT
 );
+
+CREATE TABLE gravacoes (
+    id uuid PRIMARY KEY,
+    telefone TEXT,
+    ramal TEXT,
+    dataGravacao TEXT
+);

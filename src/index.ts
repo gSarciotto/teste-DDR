@@ -1,7 +1,8 @@
 import * as express from "express";
-import { generateTabulacoesRouter } from "./TabulacaoGerenciamento";
 import { config } from "dotenv";
 import { Pg } from "./utils";
+import { generateGravacoesRouter } from "./GravacaoGerenciamento";
+import { generateTabulacoesRouter } from "./TabulacaoGerenciamento";
 
 config();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(generateTabulacoesRouter(pg));
+app.use(generateGravacoesRouter(pg));
 
 app.listen(3000, () => {
     console.log("server started");
