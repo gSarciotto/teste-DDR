@@ -1,11 +1,11 @@
 import { Router, Request, Response } from "express";
 import Gravacao from "./Gravacao";
 import GravacaoDatabase from "./GravacaoDatabase";
-import { Pg } from "../utils";
+import { Database } from "../utils";
 import { convertToGravacaoAndValidate } from "./utils/validators";
 
-function generateGravacoesRouter(pg: Pg): Router {
-    const database = new GravacaoDatabase(pg);
+function generateGravacoesRouter(databaseWrapper: Database): Router {
+    const database = new GravacaoDatabase(databaseWrapper);
     const router = Router();
     router.post("/gravacoes", async (req: Request, res: Response) => {
         let bodyAsGravacao: Gravacao;
@@ -15,18 +15,8 @@ function generateGravacoesRouter(pg: Pg): Router {
             res.status(400).send();
             return;
         }
-        const query = {
-            text:
-                "INSERT INTO gravacoes (id, telefone, ramal, dataGravacao) VALUES ($1, $2, $3, $4)",
-            values: [
-                bodyAsGravacao.id,
-                bodyAsGravacao.telefone,
-                bodyAsGravacao.ramal,
-                bodyAsGravacao.dataGravacao
-            ]
-        };
-        const result = await database.query(query);
-        res.send(result);
+        const result = await database.insertOne(bodyAsGravacao);
+        res.status(201).send(result);
     });
 
     return router;
