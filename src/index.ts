@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as cron from "node-cron";
 import { config } from "dotenv";
 import { Pg } from "./utils";
 import { generateGravacoesRouter } from "./GravacaoGerenciamento";
@@ -21,11 +22,13 @@ app.get("/", (req, res) => {
 app.use(generateTabulacoesRouter(pg));
 app.use(generateGravacoesRouter(pg));
 
-/*const matchingMaker = new MatchingMakerDatabase(pg);
-matchingMaker.run().catch((err) => {
-    console.log(err);
-});*/
-
 app.listen(3000, () => {
     console.log("server started");
+    cron.schedule("*/10 * * * * *", () => {
+        console.log("scheduled function running");
+        const matchingMakerDatabase = new MatchingMakerDatabase(pg);
+        matchingMakerDatabase.run().catch((err) => {
+            console.log(err);
+        });
+    });
 });
