@@ -18,6 +18,6 @@ CREATE TABLE gravacoes (
 
 CREATE TABLE matchings (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-    gravacao_id uuid REFERENCES gravacoes(id),
-    tabulacao_id uuid REFERENCES tabulacoes(id)
+    gravacao_id uuid REFERENCES gravacoes(id) ON DELETE CASCADE,
+    tabulacao_id uuid REFERENCES tabulacoes(id) ON DELETE CASCADE
 );
