@@ -3,6 +3,7 @@ import Gravacao from "./Gravacao";
 import GravacaoDatabase from "./GravacaoDatabase";
 import { Database } from "../utils";
 import { convertToGravacaoAndValidate } from "./utils/validators";
+import { QueryResultRow } from "pg";
 
 function generateGravacoesRouter(databaseWrapper: Database): Router {
     const database = new GravacaoDatabase(databaseWrapper);
@@ -15,7 +16,13 @@ function generateGravacoesRouter(databaseWrapper: Database): Router {
             res.status(400).send();
             return;
         }
-        const result = await database.insertOne(bodyAsGravacao);
+        let result: QueryResultRow;
+        try {
+            result = await database.insertOne(bodyAsGravacao);
+        } catch (err) {
+            res.status(500).send("Unable to store in database.");
+            return;
+        }
         res.status(201).send(result);
     });
 

@@ -3,6 +3,7 @@ import Tabulacao from "./Tabulacao";
 import { convertToTabulacaoAndValidate } from "./utils/validators";
 import { Database } from "../utils";
 import TabulacaoDatabase from "./TabulacaoDatabase";
+import { QueryResult } from "pg";
 
 function generateTabulacoesRouter(databaseWrapper: Database): Router {
     const database = new TabulacaoDatabase(databaseWrapper);
@@ -15,7 +16,13 @@ function generateTabulacoesRouter(databaseWrapper: Database): Router {
             res.status(400).send();
             return; //so that typescript doesnt complain about using bodyAsTabulacao below
         }
-        const result = await database.insertOne(bodyAsTabulacao);
+        let result: QueryResult;
+        try {
+            result = await database.insertOne(bodyAsTabulacao);
+        } catch (err) {
+            res.status(500).send("Unable to store in database.");
+            return;
+        }
         res.status(201).send(result);
     });
     return router;
