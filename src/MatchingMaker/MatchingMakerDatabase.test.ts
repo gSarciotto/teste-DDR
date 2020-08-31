@@ -3,8 +3,8 @@ import {
     IMatchingMakerDatabase
 } from "./MatchingMakerDatabase";
 import { Pg } from "../utils";
-import { Gravacao, GravacaoDatabase } from "../GravacaoGerenciamento";
-import { Tabulacao, TabulacaoDatabase } from "../TabulacaoGerenciamento";
+import { Gravacao, GravacaoDatabase } from "../GravacaoManagement";
+import { Tabulacao, TabulacaoDatabase } from "../TabulacaoManagement";
 import { config } from "dotenv";
 
 config();

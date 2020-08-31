@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import Tabulacao from "./Tabulacao";
 import { convertToTabulacaoAndValidate } from "./utils/validators";
-import { Database } from "../utils/";
+import { Database } from "../utils";
 import TabulacaoDatabase from "./TabulacaoDatabase";
 
 function generateTabulacoesRouter(databaseWrapper: Database): Router {

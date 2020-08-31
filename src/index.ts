@@ -2,8 +2,8 @@ import * as express from "express";
 import * as cron from "node-cron";
 import { config } from "dotenv";
 import { Pg } from "./utils";
-import { generateGravacoesRouter } from "./GravacaoGerenciamento";
-import { generateTabulacoesRouter } from "./TabulacaoGerenciamento";
+import { generateGravacoesRouter } from "./GravacaoManagement";
+import { generateTabulacoesRouter } from "./TabulacaoManagement";
 import MatchingMakerDatabase from "./MatchingMaker/MatchingMakerDatabase";
 import { generateListMatchingsRouter } from "./ListMatchings";
 
@@ -22,7 +22,7 @@ app.use(generateListMatchingsRouter(pg));
 
 app.listen(3000, () => {
     console.log("server started");
-    cron.schedule("*/10 * * * * *", () => {
+    cron.schedule("* * */6 * * *", () => {
         console.log("scheduled function running");
         const matchingMakerDatabase = new MatchingMakerDatabase(pg);
         matchingMakerDatabase.run().catch((err) => {
